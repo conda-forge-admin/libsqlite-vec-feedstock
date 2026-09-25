@@ -74,10 +74,11 @@ outputs:
       noarch: python
       script:
         content:
-          - python -m pip install "${{ RECIPE_DIR }}/sqlite-vec-python" -vv
+          - python -m pip install "${{ RECIPE_DIR }}/sqlite-vec-python" -vv --no-build-isolation --no-deps
     requirements:
       host:
         - python ${{ python_min }}.*
+        - setuptools
         - pip
       run:
         - python >=${{ python_min }}
@@ -101,7 +102,7 @@ outputs:
           - |
               python -c "
               import sqlite_vec, importlib.metadata
-              assert '${{ version }}' == importlib.metadata.version("sqlite-vec"), 'Version mismatch, please update recipe/sqlite-vec/pyproject.toml'
+              assert '${{ version }}' == importlib.metadata.version('sqlite-vec'), 'Version mismatch, please update recipe/sqlite-vec/pyproject.toml'
               assert '${{ version }}' == sqlite_vec.__version__, 'Version mismatch, please update recipe/sqlite-vec/sqlite_vec/__init__.py'
               "
 
