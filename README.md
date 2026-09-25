@@ -229,6 +229,3 @@ Feedstock Maintainers
 
 * [@jsmolic](https://github.com/jsmolic/)
 
-
-<!-- dummy commit to enable rerendering -->
-
