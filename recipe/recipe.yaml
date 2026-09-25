@@ -92,19 +92,15 @@ outputs:
             - ${{ python_min }}.*
             - "*"
       - script:
-          - |
-              python -c "
-              import sqlite3, sqlite_vec
-              db = sqlite3.connect(':memory:')
-              db.enable_load_extension(True)
-              sqlite_vec.load(db)
-              "
-          - |
-              python -c "
-              import sqlite_vec, importlib.metadata
-              assert '${{ version }}' == importlib.metadata.version('sqlite-vec'), 'Version mismatch, please update recipe/sqlite-vec/pyproject.toml'
-              assert '${{ version }}' == sqlite_vec.__version__, 'Version mismatch, please update recipe/sqlite-vec/sqlite_vec/__init__.py'
-              "
+          - >-
+              python -c "import sqlite3, sqlite_vec;
+              db = sqlite3.connect(':memory:');
+              db.enable_load_extension(True);
+              sqlite_vec.load(db);"
+          - >-
+              python -c "import sqlite_vec, importlib.metadata;
+              assert '${{ version }}' == importlib.metadata.version('sqlite-vec'), 'Version mismatch, please update recipe/sqlite-vec/pyproject.toml';
+              assert '${{ version }}' == sqlite_vec.__version__, 'Version mismatch, please update recipe/sqlite-vec/sqlite_vec/__init__.py';"
 
 about:
   homepage: https://github.com/asg017/sqlite-vec
